@@ -23,9 +23,4 @@ $config['ya_counter_id'] = '';
 
 Config::Set('router.page.makayam', 'PluginMakayam_ActionMakayam');
 
-if (is_file(dirname(__FILE__) . '/config.local.php')) 
-{
-    include(dirname(__FILE__) . '/config.local.php');
-}
-
 return $config;
