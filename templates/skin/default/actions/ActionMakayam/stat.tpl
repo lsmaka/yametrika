@@ -23,11 +23,6 @@
       // Callback that creates and populates a data table, 
       // instantiates the pie chart, passes in the data and
       // draws it.
-	function getRandomArbitary(min, max)
-	{
-		return Math.random() * (max - min) + min;
-	}
-	  
     function drawChart() 
 	{
 		var param = {};
