@@ -20,9 +20,6 @@
       // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table, 
-      // instantiates the pie chart, passes in the data and
-      // draws it.
     function drawChart() 
 	{
 		var param = {};
@@ -38,13 +35,17 @@
 						var dataVisitorsPageView = new Array();
 						var dataVisitorsNewVisitors = new Array();
 						
-						for(key in result.aItems[sStatName]['data'])
+						//for(key in result.aItems[sStatName]['data'])
+						var key = result.aItems[sStatName]['data'].length-1;
+						while(key >= 0)
 						{
 							dataVisitorsVisits[dataVisitorsVisits.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
 							dataVisitorsPageView[dataVisitorsPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];
 							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['new_visitors'])];	
 							//dataDepthPageView[dataDepthPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['depth']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];						
+							key--;
 						}
+						dataVisitorsVisits = dataVisitorsVisits.reverse();
 						// visitors  & visits begin	----------------------------------------------------------------------------------------------------------------------
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Дата');
