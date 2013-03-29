@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>
+        <lang name="default">Maka YandexMetrika</lang>
+        <lang name="russian">Maka ЯндексМетрика</lang>
+    </name>
+    <author>
+        <lang name="default">lsmaka</lang>
+        <lang name="russian">lsmaka</lang>
+    </author>
+    <homepage>http://livestreet.ru</homepage>
+    <version>1.0.0</version>
+    <requires>
+        <livestreet>1.0.0</livestreet>
+        <plugins>
+        </plugins>
+    </requires>
+    <description>
+        <lang name="default">Get Yandex Stat on your web site</lang>
+        <lang name="russian">Получени статистики на сайте из Yandex Метрики</lang>
+    </description>
+</plugin>
