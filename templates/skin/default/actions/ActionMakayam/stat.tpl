@@ -45,9 +45,9 @@
 						
 						for(key in result.aItems[sStatName]['data'])
 						{
-							dataVisitorsVisits[dataVisitorsVisits.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']*getRandomArbitary(1000,2000)), parseInt(result.aItems[sStatName]['data'][key]['visits']*getRandomArbitary(1000,2000))];
-							dataVisitorsPageView[dataVisitorsPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']*getRandomArbitary(1000,2000)), parseInt(result.aItems[sStatName]['data'][key]['page_views']*getRandomArbitary(1000,2000))];
-							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']*getRandomArbitary(1000,2000)), parseInt(result.aItems[sStatName]['data'][key]['new_visitors']*getRandomArbitary(1000,2000))];	
+							dataVisitorsVisits[dataVisitorsVisits.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
+							dataVisitorsPageView[dataVisitorsPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];
+							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['new_visitors'])];	
 							//dataDepthPageView[dataDepthPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['depth']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];						
 						}
 						// visitors  & visits begin	----------------------------------------------------------------------------------------------------------------------
