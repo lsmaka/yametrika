@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class PluginMakayam_ActionMakayam extends ActionPlugin {
 
@@ -8,6 +8,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	protected $ya_app_password = '';
 	protected $ya_token = '';
 	protected $ya_counter_id = '';
+	protected $ya_update_time;
 	
 	protected $aResult = array();
 	
@@ -57,6 +58,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$this->ya_app_id = Config::Get('plugin.makayam.ya_app_id');
 		$this->ya_app_password = Config::Get('plugin.makayam.ya_app_password');
 		$this->ya_counter_id = Config::Get('plugin.makayam.ya_counter_id');
+		$this->ya_update_time = Config::Get('plugin.makayam.ya_update_time');
 	}
 	//
 	protected function yandexLogin() {
@@ -100,7 +102,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			{
 				if($result = @file_get_contents($sPath)) 
 				{
-					$this->Cache_Set( $result, $cache_key , array(), 60*60);
+					$this->Cache_Set( $result, $cache_key , array(), $this->ya_update_time);
 				}
 				else
 				{

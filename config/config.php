@@ -21,6 +21,17 @@ $config['ya_app_password'] = '';
 // Номер счетчика. Посмотреть можно тут http://metrika.yandex.ru/grants/
 $config['ya_counter_id'] = '';
 
+// Периоды обновления статистики. 
+// В промежутках между периодами статистика будет браться из кеш
+$config['ya_update_time'] = 60*60;
+
 Config::Set('router.page.makayam', 'PluginMakayam_ActionMakayam');
 
+
+if (is_file(dirname(__FILE__) . '/config.local.php')) 
+{
+    include(dirname(__FILE__) . '/config.local.php');
+}
+
 return $config;
+
