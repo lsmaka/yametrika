@@ -27,9 +27,16 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
     protected function EventAjax()
     {
 		$this->Viewer_SetResponseAjax('json');
-		
-    	$this->initYandexData();
-		$this->yandexLogin();
+		$this->initYandexData();
+
+		if(isset($_SESSION['makayam_token']))
+		{
+			$this->ya_token = $_SESSION['makayam_token'];
+		}
+		else
+		{
+			$this->yandexLogin();
+		}		
 
 		$aMethods = array('/stat/traffic/summary' => 'Summary', '/stat/geo' => 'GeoSity');
 		$aParams = array('id' => $this->ya_counter_id);
@@ -64,6 +71,8 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		curl_close($ch);  
 		
 		$result_decode = json_decode($result, true);
+		
+		$_SESSION['makayam_token'] = $result_decode['access_token'];
 		$this->ya_token = $result_decode['access_token'];
 		
 		return true;
@@ -87,8 +96,11 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			{
 				if($result = @file_get_contents($sPath)) 
 				{
-					//$this->ya_success($sMethodName, $result);
 					$this->Cache_Set( $result, $cache_key );
+				}
+				else
+				{
+					unset($_SESSION['makayam_token']);
 				}
 			}
 			$this->ya_success($sMethodName, $result);
