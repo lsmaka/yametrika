@@ -1,7 +1,8 @@
-﻿{assign var="noSidebar" value='true'} 
+{assign var="noSidebar" value='true'} 
 {include file='header.tpl'}
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<div id="makayam" style="width: 100%; text-align: center;"></div>
 <div id="makayam_Summary_VisitorsVisits"></div>
 <div id="makayam_Summary_VisitorsNewVisitors"></div>
 <div id="makayam_Summary_VisitorsPageView"></div>
@@ -30,7 +31,8 @@
 		ls.ajax(aRouter['makayam']+'ajax/',param ,function(result)
 		{
 			if (!result.bStateError)
-			{	
+			{
+				$('#makayam').html('');
 				for(sStatName in result.aItems)
 				{
 					if(sStatName == 'Summary')
@@ -163,10 +165,10 @@
 			}
 			else
 			{
-				$('#makayam').html('no data');
+				$('#makayam').html('Ошибка получения данных. Пожалуйста обносите страницу !');
 			}	
 		});
-		$('#makayam').html('Производиться загрузка данных... ожидайте');
+		$('#makayam').html('<img src="plugins/makayam/templates/skin/default/images/loader.gif">');
     }
 //]]>
 </script>
