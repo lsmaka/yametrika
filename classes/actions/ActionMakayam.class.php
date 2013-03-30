@@ -41,7 +41,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$aMethods = array(
 			'/stat/traffic/summary' => 'Summary', 
 			'/stat/geo' => 'Geo',
-			'/stat/demography/age_gender' => 'Demography',
+			'/stat/demography/age_gender' => 'Demography'
 			);
 		$aParams = array('id' => $this->ya_counter_id);
 		

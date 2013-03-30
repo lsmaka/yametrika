@@ -125,7 +125,7 @@
 						var dataDemographyAge = new Array();
 						for(key in result.aItems[sStatName]['data'])
 						{
-							dataDemographyAge[dataDemographyAge.length] = [result.aItems[sStatName]['data'][key]['name'], parseInt(result.aItems[sStatName]['data'][key]['visits_percent'])];													
+							dataDemographyAge[dataDemographyAge.length] = [result.aItems[sStatName]['data'][key]['name'], parseFloat(result.aItems[sStatName]['data'][key]['visits_percent']) ];
 						}
 						// visits & visitors begin	
 						var data = new google.visualization.DataTable();
@@ -144,8 +144,8 @@
 					//
 					//
 						var dataDemographySex = [ 
-							[ result.aItems[sStatName]['data_gender'][0]['name'] , result.aItems[sStatName]['data_gender'][0]['visits_percent']],
-							[ result.aItems[sStatName]['data_gender'][1]['name'] , result.aItems[sStatName]['data_gender'][1]['visits_percent']]
+							[ result.aItems[sStatName]['data_gender'][0]['name'] , parseFloat(result.aItems[sStatName]['data_gender'][0]['visits_percent']) ],
+							[ result.aItems[sStatName]['data_gender'][1]['name'] , parseFloat(result.aItems[sStatName]['data_gender'][1]['visits_percent']) ]
 							
 							];	
 						var data = new google.visualization.DataTable();
