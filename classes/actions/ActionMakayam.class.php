@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 class PluginMakayam_ActionMakayam extends ActionPlugin {
 
@@ -22,7 +22,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
     }
 	protected function EventStat()
 	{
-	
+
 	}
     protected function EventAjax()
     {
@@ -38,7 +38,11 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			$this->yandexLogin();
 		}		
 
-		$aMethods = array('/stat/traffic/summary' => 'Summary', '/stat/geo' => 'GeoSity');
+		$aMethods = array(
+			'/stat/traffic/summary' => 'Summary', 
+			'/stat/geo' => 'Geo',
+			'/stat/demography/age_gender' => 'Demography',
+			);
 		$aParams = array('id' => $this->ya_counter_id);
 		
 		$this->yandexMetrikeQuery($aMethods, $aParams);
@@ -96,7 +100,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			{
 				if($result = @file_get_contents($sPath)) 
 				{
-					$this->Cache_Set( $result, $cache_key );
+					$this->Cache_Set( $result, $cache_key , array(), 60*60);
 				}
 				else
 				{
