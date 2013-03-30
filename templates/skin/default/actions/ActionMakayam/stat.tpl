@@ -60,7 +60,7 @@
 
 						// Set chart options
 						//var options = {'title':'visitors & visits', 'width':800, 'height':400};
-						var options = {'title':'Посетители & Визиты', 'width':800, 'height':400};
+						var options = {curveType: "function", 'title':'Посетители & Визиты', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsVisits'));
@@ -76,7 +76,7 @@
 						data.addRows(dataVisitorsNewVisitors);
 
 						// Set chart options
-						var options = {'title':'Посетители & Новые посетители', 'width':800, 'height':400};
+						var options = {curveType: "function", 'title':'Посетители & Новые посетители', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsNewVisitors'));
@@ -92,7 +92,7 @@
 						data.addRows(dataVisitorsPageView);
 
 						// Set chart options
-						var options = {'title':'Посетители & Просмотры', 'width':800, 'height':400};
+						var options = {curveType: "function", 'title':'Посетители & Просмотры', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsPageView'));
