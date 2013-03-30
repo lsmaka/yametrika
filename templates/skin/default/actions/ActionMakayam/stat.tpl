@@ -35,7 +35,6 @@
 						var dataVisitorsPageView = new Array();
 						var dataVisitorsNewVisitors = new Array();
 						
-						//for(key in result.aItems[sStatName]['data'])
 						var key = result.aItems[sStatName]['data'].length-1;
 						while(key >= 0)
 						{
@@ -45,7 +44,7 @@
 							//dataDepthPageView[dataDepthPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['depth']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];						
 							key--;
 						}
-						dataVisitorsVisits = dataVisitorsVisits.reverse();
+						
 						// visitors  & visits begin	----------------------------------------------------------------------------------------------------------------------
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Дата');
