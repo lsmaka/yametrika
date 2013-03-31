@@ -1,4 +1,4 @@
-{assign var="noSidebar" value='true'} 
+{assign var="noSidebar" value=true} 
 {include file='header.tpl'}
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -61,10 +61,16 @@
 						var key = result.aItems[sStatName]['data'].length-1;
 						while(key >= 0)
 						{
-							dataVisitorsVisits[dataVisitorsVisits.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
-							dataVisitorsPageView[dataVisitorsPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];
-							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['new_visitors'])];	
-							//dataDepthPageView[dataDepthPageView.length] = [result.aItems[sStatName]['data'][key]['date'], parseInt(result.aItems[sStatName]['data'][key]['depth']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];						
+							//
+							var re = /(\d{2})(\d{2})(\d{2})(\d{2})/;
+							curdate = result.aItems[sStatName]['data'][key]['date']
+							var newdata = curdate.replace(re, "$4.$3.$2");
+
+							//
+							dataVisitorsVisits[dataVisitorsVisits.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
+							dataVisitorsPageView[dataVisitorsPageView.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];
+							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['new_visitors'])];	
+							
 							key--;
 						}
 						
