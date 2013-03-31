@@ -121,7 +121,15 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	//
 	protected function ya_success($sMethodName, $result)
 	{
-		$this->aResult[$sMethodName] = json_decode($result, true);
+		$aResultOrigin = json_decode($result, true);
+		
+		// Для тестирования. Завышение показателей. По умолчанию данный файл отсутствует.		
+		if (is_file(dirname(__FILE__) . '/bluff.php')) 
+		{
+			include(dirname(__FILE__) . '/bluff.php');
+		}		
+		//
+		$this->aResult[$sMethodName] = $aResultOrigin;
 	}
 	//
 	protected function __makayam_make_date()
