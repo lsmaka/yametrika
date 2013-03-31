@@ -24,13 +24,17 @@ $config['ya_counter_id'] = '';
 // Периоды обновления статистики. 
 // В промежутках между периодами статистика будет браться из кеш (секунды)
 // Например 60*60 = час
-$config['ya_update_time'] = 60*60;
+$config['ya_update_time'] = 60;
 
 //Период вывода статистики
 // w - неделя
 // m - месяц
 // y - год
 $config['ya_stat_time'] = 'w';
+
+// Группировка выводимых данных
+// day, week, month 
+$config['ya_stat_group'] = 'week';
 
 Config::Set('router.page.makayam', 'PluginMakayam_ActionMakayam');
 

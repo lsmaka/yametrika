@@ -10,6 +10,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	protected $ya_counter_id = '';
 	protected $ya_update_time;
 	protected $ya_stat_time;
+	protected $ya_stat_group;
 	
 	protected $aResult = array();
 	
@@ -46,7 +47,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			'/stat/demography/age_gender' => 'Demography'
 			);
 		list($date1, $date2) = $this->__makayam_make_date();	
-		$aParams = array('id' => $this->ya_counter_id, 'date1' => $date1, 'date2' => $date2);
+		$aParams = array('id' => $this->ya_counter_id, 'date1' => $date1, 'date2' => $date2, 'group' => $this->ya_stat_group);
 		
 		$this->yandexMetrikeQuery($aMethods, $aParams);
 		$this->Viewer_AssignAjax('aItems',$this->aResult);
@@ -62,7 +63,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$this->ya_counter_id = Config::Get('plugin.makayam.ya_counter_id');
 		$this->ya_update_time = Config::Get('plugin.makayam.ya_update_time');
 		$this->ya_stat_time = Config::Get('plugin.makayam.ya_stat_time');
-		
+		$this->ya_stat_group = Config::Get('plugin.makayam.ya_stat_group');
 	}
 	//
 	protected function yandexLogin() {
