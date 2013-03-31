@@ -2,6 +2,22 @@
 {include file='header.tpl'}
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<center>
+	<h4>
+		<u>
+			{$aLang.plugin.makayam.stat_title}
+			{if $oConfig->get('plugin.makayam.ya_stat_time') == 'w'}
+			(за неделю)
+			{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'm'}
+			(за месяц) 	
+			{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'y'}
+			(за год)
+			{/if}
+			
+		</u>
+	</h4>
+</center>
+
 <div id="makayam" style="width: 100%; text-align: center;"></div>
 <div id="makayam_Summary_VisitorsVisits"></div>
 <div id="makayam_Summary_VisitorsNewVisitors"></div>
@@ -62,7 +78,12 @@
 
 						// Set chart options
 						//var options = {'title':'visitors & visits', 'width':800, 'height':400};
-						var options = {curveType: "function", 'title':'Посетители & Визиты', 'width':800, 'height':400};
+						var options = {
+							curveType: "function",  
+							'width':800, 'height':400,
+							legend: {position: 'top'},
+							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
+							};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsVisits'));
@@ -78,7 +99,12 @@
 						data.addRows(dataVisitorsNewVisitors);
 
 						// Set chart options
-						var options = {curveType: "function", 'title':'Посетители & Новые посетители', 'width':800, 'height':400};
+						var options = {
+							curveType: "function",  
+							'width':800, 'height':400,
+							legend: {position: 'top'},
+							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
+							};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsNewVisitors'));
@@ -94,7 +120,12 @@
 						data.addRows(dataVisitorsPageView);
 
 						// Set chart options
-						var options = {curveType: "function", 'title':'Посетители & Просмотры', 'width':800, 'height':400};
+						var options = {
+							curveType: "function",  
+							'width':800, 'height':400,
+							legend: {position: 'top'},
+							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
+							};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsPageView'));
@@ -116,7 +147,7 @@
 						data.addRows(dataGeo);
 
 						// Set chart options
-						var options = {'title':'Страны & Визиты', 'width':800, 'height':400};
+						var options = {'title':'Распределение по странам', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.PieChart(document.getElementById('makayam_Geo_Country'));
@@ -137,7 +168,7 @@
 						data.addRows(dataDemographyAge);
 
 						// Set chart options
-						var options = {'title':'Возраст & Доля визитов', 'width':800, 'height':400};
+						var options = {'title':'Распределение по возрасту', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.PieChart(document.getElementById('makayam_Demography_Age'));
@@ -155,7 +186,7 @@
 						data.addColumn('number', 'Доля визитов');	
 						data.addRows(dataDemographySex);
 						
-						var options = {'title':'Пол & Доля визитов', 'width':800, 'height':400};
+						var options = {'title':'Распределение по полу', 'width':800, 'height':400};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.PieChart(document.getElementById('makayam_Demography_Sex'));

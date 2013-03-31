@@ -9,6 +9,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	protected $ya_token = '';
 	protected $ya_counter_id = '';
 	protected $ya_update_time;
+	protected $ya_stat_time;
 	
 	protected $aResult = array();
 	
@@ -44,7 +45,8 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			'/stat/geo' => 'Geo',
 			'/stat/demography/age_gender' => 'Demography'
 			);
-		$aParams = array('id' => $this->ya_counter_id);
+		list($date1, $date2) = $this->__makayam_make_date();	
+		$aParams = array('id' => $this->ya_counter_id, 'date1' => $date1, 'date2' => $date2);
 		
 		$this->yandexMetrikeQuery($aMethods, $aParams);
 		$this->Viewer_AssignAjax('aItems',$this->aResult);
@@ -59,6 +61,8 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$this->ya_app_password = Config::Get('plugin.makayam.ya_app_password');
 		$this->ya_counter_id = Config::Get('plugin.makayam.ya_counter_id');
 		$this->ya_update_time = Config::Get('plugin.makayam.ya_update_time');
+		$this->ya_stat_time = Config::Get('plugin.makayam.ya_stat_time');
+		
 	}
 	//
 	protected function yandexLogin() {
@@ -119,5 +123,27 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$this->aResult[$sMethodName] = json_decode($result, true);
 	}
 	//
+	protected function __makayam_make_date()
+	{
+		$date1 = '';
+		$date2 = date('Ymd');
+		
+		if($this->ya_stat_time == 'w')
+		{
+			$sWeek = 60*60*24*7;
+			$date1 = date('Ymd', strtotime($date2) - $sWeek);
+		}
+		else if($this->ya_stat_time == 'm')
+		{
+			$sMonth = 60*60*24*30;
+			$date1 = date('Ymd', strtotime($date2) - $sMonth);		
+		}
+		else if($this->ya_stat_time == 'y')
+		{
+			$date1 = date('Y').'0101';		
+		}
+		
+		return array($date1, $date2);
+	}
 }
 ?>
