@@ -78,7 +78,7 @@
 						data.addRows(dataVisitorsVisits);
 
 						// Set chart options
-						var options = {displayAnnotations: true};
+						var options = {'dateFormat': 'dd MMMM, yyyy'};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsVisits'));
@@ -98,7 +98,7 @@
 						data.addRows(dataVisitorsNewVisitors);
 
 						// Set chart options
-						var options = {displayAnnotations: true};
+						var options = {'dateFormat': 'dd MMMM, yyyy'};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsNewVisitors'));
@@ -118,7 +118,7 @@
 						data.addRows(dataVisitorsPageView);
 
 						// Set chart options
-						var options = {displayAnnotations: true};
+						var options = {'dateFormat': 'dd MMMM, yyyy'};
 
 						// Instantiate and draw our chart, passing in some options.
 						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsPageView'));
