@@ -25,7 +25,7 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
     }
 	protected function EventStat()
 	{
-
+		$this->SetTemplateAction('stat_'.Config::Get('plugin.makayam.ya_stat_type'));
 	}
     protected function EventAjax()
     {

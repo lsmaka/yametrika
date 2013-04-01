@@ -23,8 +23,20 @@ $config['ya_counter_id'] = '';
 // В промежутках между периодами статистика будет браться из кеш
 $config['ya_update_time'] = 60*60;
 
+//Период вывода статистики
+// w - неделя
+// m - месяц
+// y - год
+$config['ya_stat_time'] = 'y';
+
 // Группировка выводимых данных
 // day, week, month 
-$config['ya_stat_group'] = 'week';
+$config['ya_stat_group'] = 'day';
+
+// Тип выводимых графиков
+// v1 - версия первая
+// v2 - версия вторая
+$config['ya_stat_type'] = 'v1';
+
 
 return $config;

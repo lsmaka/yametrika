@@ -6,22 +6,14 @@
 	<h4>
 		<u>
 			{$aLang.plugin.makayam.stat_title}
-			{if $oConfig->get('plugin.makayam.ya_stat_time') == 'w'}
-			(за неделю)
-			{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'm'}
-			(за месяц) 	
-			{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'y'}
-			(за год)
-			{/if}
-			
 		</u>
 	</h4>
 </center>
 
 <div id="makayam" style="width: 100%; text-align: center;"></div>
-<div id="makayam_Summary_VisitorsVisits"></div>
-<div id="makayam_Summary_VisitorsNewVisitors"></div>
-<div id="makayam_Summary_VisitorsPageView"></div>
+<div id="makayam_Summary_VisitorsVisits" style="width: 800px; height: 400px;"></div><br/><br/>
+<div id="makayam_Summary_VisitorsNewVisitors" style="width: 800px; height: 400px;"></div><br/><br/>
+<div id="makayam_Summary_VisitorsPageView" style="width: 800px; height: 400px;"></div><br/>
 <div id="makayam_Demography_Age"></div>
 <div id="makayam_Demography_Sex"></div>
 <div id="makayam_Geo_Country"></div>
@@ -36,7 +28,7 @@
 <script type="text/javascript">
 //<![CDATA[
       // Load the Visualization API and the piechart package.
-    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.load('visualization', '1.0', {'packages':['corechart','annotatedtimeline']});
       
       // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
@@ -62,79 +54,74 @@
 						while(key >= 0)
 						{
 							//
-							var re = /(\d{2})(\d{2})(\d{2})(\d{2})/;
+							var re = /(\d{4})(\d{2})(\d{2})/;
 							curdate = result.aItems[sStatName]['data'][key]['date']
-							var newdata = curdate.replace(re, "$4.$3.$2");
-
+							var dateArray = re.exec(curdate); 
 							//
-							dataVisitorsVisits[dataVisitorsVisits.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
-							dataVisitorsPageView[dataVisitorsPageView.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['page_views'])];
-							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['new_visitors'])];	
+							dataVisitorsVisits[dataVisitorsVisits.length] = [new Date(dateArray[1], dateArray[2]-1 ,dateArray[3]), parseInt(result.aItems[sStatName]['data'][key]['visitors']), undefined,undefined, parseInt(result.aItems[sStatName]['data'][key]['visits']),undefined,undefined];
+							dataVisitorsPageView[dataVisitorsPageView.length] = [new Date(dateArray[1], dateArray[2]-1 ,dateArray[3]), parseInt(result.aItems[sStatName]['data'][key]['visitors']), undefined,undefined, parseInt(result.aItems[sStatName]['data'][key]['page_views']), undefined,undefined];
+							dataVisitorsNewVisitors[dataVisitorsNewVisitors.length] = [new Date(dateArray[1], dateArray[2]-1 ,dateArray[3]), parseInt(result.aItems[sStatName]['data'][key]['visitors']), undefined,undefined, parseInt(result.aItems[sStatName]['data'][key]['new_visitors']), undefined,undefined];	
 							
 							key--;
 						}
 						
 						// visitors  & visits begin	----------------------------------------------------------------------------------------------------------------------
 						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Дата');
+						data.addColumn('date', 'Дата');
 						data.addColumn('number', 'Посетители');
+						data.addColumn('string', 'data1');
+						data.addColumn('string', 'data2');
 						data.addColumn('number', 'Визиты');
-
+						data.addColumn('string', 'data4');
+						data.addColumn('string', 'data5');
+						
 						data.addRows(dataVisitorsVisits);
 
 						// Set chart options
-						//var options = {'title':'visitors & visits', 'width':800, 'height':400};
-						var options = {
-							curveType: "function",  
-							'width':800, 'height':400,
-							legend: {position: 'top'},
-							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
-							};
+						var options = {displayAnnotations: true};
 
 						// Instantiate and draw our chart, passing in some options.
-						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsVisits'));
+						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsVisits'));
 						chart.draw(data, options);
 						// visitors  & visits end ----------------------------------------------------------------------------------------------------------------------	
 
 						// visitors  & new visitors begin	----------------------------------------------------------------------------------------------------------------------
 						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Дата');
+						data.addColumn('date', 'Дата');
 						data.addColumn('number', 'Посетители');
+						data.addColumn('string', 'data1');
+						data.addColumn('string', 'data2');						
 						data.addColumn('number', 'Новые посетители');
+						data.addColumn('string', 'data1');
+						data.addColumn('string', 'data2');						
 
 						data.addRows(dataVisitorsNewVisitors);
 
 						// Set chart options
-						var options = {
-							curveType: "function",  
-							'width':800, 'height':400,
-							legend: {position: 'top'},
-							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
-							};
+						var options = {displayAnnotations: true};
 
 						// Instantiate and draw our chart, passing in some options.
-						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsNewVisitors'));
+						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsNewVisitors'));
 						chart.draw(data, options);
 						// visitors  & new visitors end ----------------------------------------------------------------------------------------------------------------------							
 						
 						// visits & page view  begin ----------------------------------------------------------------------------------------------------------------------
 						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Дата');
+						data.addColumn('date', 'Дата');
 						data.addColumn('number', 'Посетители');
+						data.addColumn('string', 'data1');
+						data.addColumn('string', 'data2');							
 						data.addColumn('number', 'Просмотры');
+						data.addColumn('string', 'data1');
+						data.addColumn('string', 'data2');							
 
 						data.addRows(dataVisitorsPageView);
 
 						// Set chart options
-						var options = {
-							curveType: "function",  
-							'width':800, 'height':400,
-							legend: {position: 'top'},
-							pointSize: 5, hAxis: {textStyle: {fontSize: 9}}
-							};
+						var options = {displayAnnotations: true};
 
 						// Instantiate and draw our chart, passing in some options.
-						var chart = new google.visualization.LineChart(document.getElementById('makayam_Summary_VisitorsPageView'));
+						var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('makayam_Summary_VisitorsPageView'));
 						chart.draw(data, options);
 						// visits & page view end ----------------------------------------------------------------------------------------------------------------------
 					}
