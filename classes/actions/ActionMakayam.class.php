@@ -12,6 +12,8 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	protected $ya_stat_time;
 	protected $ya_stat_group;
 	
+	protected $ya_error;
+	
 	protected $aResult = array();
 	
     public function Init() {
@@ -32,14 +34,14 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		$this->Viewer_SetResponseAjax('json');
 		$this->initYandexData();
 
-		if(isset($_SESSION['makayam_token']))
+		if (false === ($this->ya_token = $this->Cache_Get( 'access_token' ))) 
 		{
-			$this->ya_token = $_SESSION['makayam_token'];
-		}
-		else
-		{
-			$this->yandexLogin();
-		}		
+			if(!$this->yandexLogin())
+			{
+				$this->Viewer_AssignAjax('aItems', $this->ya_error);
+				return;
+			}
+		}	
 
 		$aMethods = array(
 			'/stat/traffic/summary' => 'Summary', 
@@ -49,7 +51,11 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		list($date1, $date2) = $this->__makayam_make_date();	
 		$aParams = array('id' => $this->ya_counter_id, 'date1' => $date1, 'date2' => $date2, 'group' => $this->ya_stat_group);
 		
-		$this->yandexMetrikeQuery($aMethods, $aParams);
+		if(!$this->yandexMetrikeQuery($aMethods, $aParams))
+		{
+			$this->Viewer_AssignAjax('aItems', $this->ya_error);
+			return;
+		}
 		$this->Viewer_AssignAjax('aItems',$this->aResult);
     }
 	
@@ -76,14 +82,18 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
 		curl_setopt($ch, CURLOPT_TIMEOUT, 9); 
 		curl_setopt($ch, CURLOPT_POST, 1); // set POST method
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=password&username={$this->ya_login}&password={$this->ya_password}&client_id={$this->ya_app_id}&client_secret={$this->ya_app_password}"); 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=password&username=".urlencode($this->ya_login)."&password=".urlencode($this->ya_password)."&client_id={$this->ya_app_id}&client_secret={$this->ya_app_password}"); 
 		$result = curl_exec($ch); 
 		$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);  
 		
 		$result_decode = json_decode($result, true);
-		
-		$_SESSION['makayam_token'] = $result_decode['access_token'];
+		if(!isset($result_decode['access_token']))
+		{
+			$this->ya_error = 'login_error';
+			return false;
+		}
+		$this->Cache_Set( $result_decode['access_token'], 'access_token');
 		$this->ya_token = $result_decode['access_token'];
 		
 		return true;
@@ -111,7 +121,9 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 				}
 				else
 				{
-					unset($_SESSION['makayam_token']);
+					$this->Cache_Delete( 'access_token' );
+					$this->ya_error = 'file_get_contents_error';
+					return false;
 				}
 			}
 			$this->ya_success($sMethodName, $result);

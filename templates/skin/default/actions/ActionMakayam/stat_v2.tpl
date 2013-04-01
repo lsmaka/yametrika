@@ -3,14 +3,21 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 <center>
-	<h4>
-		<u>
-			{$aLang.plugin.makayam.stat_title}
-		</u>
-	</h4>
+	<div id="makayam_header" style="display: none;">
+		<h4>
+			<u>
+				{$aLang.plugin.makayam.stat_title}
+			</u>
+		</h4>
+	</div>	
 </center>
 
-<div id="makayam" style="width: 100%; text-align: center;"></div>
+<br/>
+
+<div id="makayam_loader" style="width: 100%; text-align: center;"></div>
+<center>
+	<div id="makayam_error" style="width: 400px; text-align: center; padding: 10px; border: 2px solid red; display: none;"></div>
+</center>
 <div id="makayam_Summary_VisitorsVisits" style="width: 800px; height: 400px;"></div><br/><br/>
 <div id="makayam_Summary_VisitorsNewVisitors" style="width: 800px; height: 400px;"></div><br/><br/>
 <div id="makayam_Summary_VisitorsPageView" style="width: 800px; height: 400px;"></div><br/>
@@ -40,7 +47,23 @@
 		{
 			if (!result.bStateError)
 			{
-				$('#makayam').html('');
+				$('#makayam_loader').html('');
+				
+				if(result.aItems == 'login_error')
+				{
+					$('#makayam_error').html('Не могу соединиться с Yandex Метрикой. Обратитесь к администратору системы.');
+					$('#makayam_error').fadeIn('slow');
+					return;
+				}
+				else if(result.aItems == 'file_get_contents_error')
+				{
+					$('#makayam_error').html('Не могу получить данные. Попробуйте обновить страницу.');
+					$('#makayam_error').fadeIn('slow');
+					return;
+				}	
+				
+				$('#makayam_header').fadeIn('slow');
+				
 				for(sStatName in result.aItems)
 				{
 					if(sStatName == 'Summary')
@@ -189,10 +212,11 @@
 			}
 			else
 			{
-				$('#makayam').html('Ошибка получения данных. Пожалуйста обносите страницу !');
+				$('#makayam_error').html('Системная ошибка. Обратись к администратору или зайдите позже !');
+				$('#makayam_error').fadeIn('slow');
 			}	
 		});
-		$('#makayam').html('<img src="plugins/makayam/templates/skin/default/images/loader.gif">');
+		$('#makayam_loader').html('<img src="plugins/makayam/templates/skin/default/images/loader.gif">');
     }
 //]]>
 </script>

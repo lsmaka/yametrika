@@ -37,7 +37,7 @@ $config['ya_stat_time'] = 'y';
 $config['ya_stat_group'] = 'day';
 
 // Тип выводимых графиков
-// v1 - версия первая  (графики без timeline)
+// v1 - версия первая
 // v2 - версия вторая
 $config['ya_stat_type'] = 'v1';
 
