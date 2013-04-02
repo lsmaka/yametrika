@@ -29,6 +29,7 @@ $config['ya_update_time'] = 60*60;
 //Период вывода статистики
 // w - неделя
 // m - месяц
+// k - квартал (3 месаца)
 // y - год
 $config['ya_stat_time'] = 'y';
 
@@ -37,8 +38,9 @@ $config['ya_stat_time'] = 'y';
 $config['ya_stat_group'] = 'day';
 
 // Тип выводимых графиков
-// v1 - версия первая
-// v2 - версия вторая
+// v1 - Google Chart Simple
+// v2 -  Coogle Chart with timeline (медленно)
+// v3 -  jqplot
 $config['ya_stat_type'] = 'v1';
 
 Config::Set('router.page.makayam', 'PluginMakayam_ActionMakayam');

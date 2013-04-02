@@ -28,6 +28,20 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 	protected function EventStat()
 	{
 		$this->SetTemplateAction('stat_'.Config::Get('plugin.makayam.ya_stat_type'));
+		
+		// jqplot
+		if(Config::Get('plugin.makayam.ya_stat_type') == 'v3')
+		{
+			//line
+			$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__)."js/external/jqplot/jquery.jqplot.min.js");	
+			$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__)."js/external/jqplot/jqplot.highlighter.min.js");	
+			$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__)."js/external/jqplot/jqplot.dateAxisRenderer.min.js");
+			// krug	
+			$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__)."js/external/jqplot/jqplot.pieRenderer.min.js");	
+			$this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__)."js/external/jqplot/jqplot.donutRenderer.min.js");	
+			
+			$this->Viewer_AppendStyle(Plugin::GetTemplatePath(__CLASS__)."css/external/jqplot/jquery.jqplot.css");
+		}
 	}
     protected function EventAjax()
     {
@@ -159,6 +173,11 @@ class PluginMakayam_ActionMakayam extends ActionPlugin {
 			$sMonth = 60*60*24*30;
 			$date1 = date('Ymd', strtotime($date2) - $sMonth);		
 		}
+		else if($this->ya_stat_time == 'k')
+		{
+			$sMonth = 60*60*24*30*3;
+			$date1 = date('Ymd', strtotime($date2) - $sMonth);		
+		}		
 		else if($this->ya_stat_time == 'y')
 		{
 			$date1 = date('Y').'0101';		

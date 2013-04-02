@@ -11,6 +11,8 @@
 				(за неделю)
 				{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'm'}
 				(за месяц) 	
+				{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'k'}
+				(за три месяца) 					
 				{elseif $oConfig->get('plugin.makayam.ya_stat_time') == 'y'}
 				(за год)
 				{/if}
@@ -85,7 +87,7 @@
 						{
 							//
 							var re = /(\d{2})(\d{2})(\d{2})(\d{2})/;
-							curdate = result.aItems[sStatName]['data'][key]['date']
+							curdate = result.aItems[sStatName]['data'][key]['date'];
 							var newdata = curdate.replace(re, "$4.$3.$2");
 							//
 							dataVisitorsVisits[dataVisitorsVisits.length] = [newdata, parseInt(result.aItems[sStatName]['data'][key]['visitors']), parseInt(result.aItems[sStatName]['data'][key]['visits'])];
