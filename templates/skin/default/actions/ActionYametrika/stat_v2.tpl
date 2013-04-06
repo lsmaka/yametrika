@@ -7,6 +7,15 @@
 		<h4>
 			<u>
 				{$aLang.plugin.yametrika.stat_title}
+				{if $oConfig->get('plugin.yametrika.ya_stat_time') == 'w'}
+					{$aLang.plugin.yametrika.stat_title_week}
+				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'm'} 	
+					{$aLang.plugin.yametrika.stat_title_month}
+				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'k'}		
+					{$aLang.plugin.yametrika.stat_title_quarter}
+				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'y'}
+					{$aLang.plugin.yametrika.stat_title_year}
+				{/if}
 			</u>
 		</h4>
 	</div>	

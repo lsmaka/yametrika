@@ -1,11 +1,6 @@
 {assign var="noSidebar" value=true} 
 {include file='header.tpl'}
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	jQuery(function($){
-		ls.lang.load({lang_load name="yametrika_test"});
-	});
-</script>
 
 <center>
 	<div id="yametrika_header" style="display: none;">
@@ -13,13 +8,13 @@
 			<u>
 				{$aLang.plugin.yametrika.stat_title}
 				{if $oConfig->get('plugin.yametrika.ya_stat_time') == 'w'}
-				(за неделю)
-				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'm'}
-				(за месяц) 	
-				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'k'}
-				(за три месяца) 					
+					{$aLang.plugin.yametrika.stat_title_week}
+				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'm'} 	
+					{$aLang.plugin.yametrika.stat_title_month}
+				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'k'}		
+					{$aLang.plugin.yametrika.stat_title_quarter}
 				{elseif $oConfig->get('plugin.yametrika.ya_stat_time') == 'y'}
-				(за год)
+					{$aLang.plugin.yametrika.stat_title_year}
 				{/if}
 			</u>
 		</h4>

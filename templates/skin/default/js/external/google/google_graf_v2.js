@@ -9,13 +9,13 @@ function drawChart_v2()
 			
 			if(result.aItems == 'login_error')
 			{
-				$('#yametrika_error').html('Не могу соединиться с Yandex Метрикой. Обратитесь к администратору системы.');
+				$('#yametrika_error').html(ls.lang.get('plugin.yametrika.yametrika_error_login'));
 				$('#yametrika_error').fadeIn('slow');
 				return;
 			}
 			else if(result.aItems == 'file_get_contents_error')
 			{
-				$('#yametrika_error').html('Не могу получить данные. Попробуйте обновить страницу.');
+				$('#yametrika_error').html(ls.lang.get('plugin.yametrika.yametrika_error_file_get_contents'));
 				$('#yametrika_error').fadeIn('slow');
 				return;
 			}	
@@ -48,11 +48,11 @@ function drawChart_v2()
 					
 					// visitors  & visits begin	----------------------------------------------------------------------------------------------------------------------
 					var data = new google.visualization.DataTable();
-					data.addColumn('date', 'Дата');
-					data.addColumn('number', 'Посетители');
+					data.addColumn('date', ls.lang.get('plugin.yametrika.yametrika_graf_label_date'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'));
 					data.addColumn('string', 'data1');
 					data.addColumn('string', 'data2');
-					data.addColumn('number', 'Визиты');
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visits'));
 					data.addColumn('string', 'data4');
 					data.addColumn('string', 'data5');
 					
@@ -68,11 +68,11 @@ function drawChart_v2()
 
 					// visitors  & new visitors begin	----------------------------------------------------------------------------------------------------------------------
 					var data = new google.visualization.DataTable();
-					data.addColumn('date', 'Дата');
-					data.addColumn('number', 'Посетители');
+					data.addColumn('date', ls.lang.get('plugin.yametrika.yametrika_graf_label_date'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'));
 					data.addColumn('string', 'data1');
 					data.addColumn('string', 'data2');						
-					data.addColumn('number', 'Новые посетители');
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_new_visitors'));
 					data.addColumn('string', 'data1');
 					data.addColumn('string', 'data2');						
 
@@ -88,11 +88,11 @@ function drawChart_v2()
 					
 					// visits & page view  begin ----------------------------------------------------------------------------------------------------------------------
 					var data = new google.visualization.DataTable();
-					data.addColumn('date', 'Дата');
-					data.addColumn('number', 'Посетители');
+					data.addColumn('date', ls.lang.get('plugin.yametrika.yametrika_graf_label_date'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'));
 					data.addColumn('string', 'data1');
 					data.addColumn('string', 'data2');							
-					data.addColumn('number', 'Просмотры');
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_page_views'));
 					data.addColumn('string', 'data1');
 					data.addColumn('string', 'data2');							
 
@@ -115,13 +115,13 @@ function drawChart_v2()
 					}
 					// visits & visitors begin	
 					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Страны');
-					data.addColumn('number', 'Визиты');
+					data.addColumn('string', ls.lang.get('plugin.yametrika.yametrika_graf_label_country'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visits'));
 
 					data.addRows(dataGeo);
 
 					// Set chart options
-					var options = {'title':'Распределение по странам'};
+					var options = {'title':ls.lang.get('plugin.yametrika.yametrika_graf_geo_title')};
 
 					// Instantiate and draw our chart, passing in some options.
 					var chart = new google.visualization.PieChart(document.getElementById('yametrika_Geo_Country'));
@@ -136,13 +136,13 @@ function drawChart_v2()
 					}
 					// visits & visitors begin	
 					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Возраст');
-					data.addColumn('number', 'Доля визитов');
+					data.addColumn('string', ls.lang.get('plugin.yametrika.yametrika_graf_label_age'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visits_percent'));
 
 					data.addRows(dataDemographyAge);
 
 					// Set chart options
-					var options = {'title':'Распределение по возрасту'};
+					var options = {'title':ls.lang.get('plugin.yametrika.yametrika_graf_age_title')};
 
 					// Instantiate and draw our chart, passing in some options.
 					var chart = new google.visualization.PieChart(document.getElementById('yametrika_Demography_Age'));
@@ -156,11 +156,11 @@ function drawChart_v2()
 						
 						];	
 					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Пол');
-					data.addColumn('number', 'Доля визитов');	
+					data.addColumn('string', ls.lang.get('plugin.yametrika.yametrika_graf_label_sex'));
+					data.addColumn('number', ls.lang.get('plugin.yametrika.yametrika_graf_label_visits_percent'));	
 					data.addRows(dataDemographySex);
 					
-					var options = {'title':'Распределение по полу'};
+					var options = {'title':ls.lang.get('plugin.yametrika.yametrika_graf_sex_title')};
 
 					// Instantiate and draw our chart, passing in some options.
 					var chart = new google.visualization.PieChart(document.getElementById('yametrika_Demography_Sex'));
@@ -170,7 +170,7 @@ function drawChart_v2()
 		}
 		else
 		{
-			$('#yametrika_error').html('Системная ошибка. Обратись к администратору или зайдите позже !');
+			$('#yametrika_error').html(ls.lang.get('plugin.yametrika.yametrika_error_system'));
 			$('#yametrika_error').fadeIn('slow');
 		}	
 	});

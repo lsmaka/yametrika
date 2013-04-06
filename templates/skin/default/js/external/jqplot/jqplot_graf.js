@@ -64,13 +64,13 @@ function drawChart_v3()
 						//
 						series:[{
 									show: true,
-									label : 'Посетители',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'),
 									showLine: true, 
 									showMarker: true
 								}, 
 								{
 									show: true,
-									label : 'Визиты',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_visits'),
 									showLine: true, 
 									showMarker: true
 								}]
@@ -106,13 +106,13 @@ function drawChart_v3()
 						//
 						series:[{
 									show: true,
-									label : 'Посетители',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'),
 									showLine: true, 
 									showMarker: true
 								}, 
 								{
 									show: true,
-									label : 'Новые посетители',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_new_visitors'),
 									showLine: true, 
 									showMarker: true
 								}]
@@ -148,13 +148,13 @@ function drawChart_v3()
 						//
 						series:[{
 									show: true,
-									label : 'Посетители',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_visitors'),
 									showLine: true, 
 									showMarker: true
 								}, 
 								{
 									show: true,
-									label : 'Просмотры',
+									label : ls.lang.get('plugin.yametrika.yametrika_graf_label_page_views'),
 									showLine: true, 
 									showMarker: true
 								}]
@@ -236,7 +236,7 @@ function drawChart_v3()
 		}
 		else
 		{
-			$('#yametrika_error').html('Системная ошибка. Обратись к администратору или зайдите позже !');
+			$('#yametrika_error').html(ls.lang.get('plugin.yametrika.yametrika_error_system'));
 			$('#yametrika_error').fadeIn('slow');
 		}		
 	});	
